@@ -61,8 +61,8 @@ for gene in selected_genes:
         textfont=dict(size=11),
         marker=dict(
             symbol="line-ew",
-            size=14,
-            line=dict(color="blue", width=2)
+            size=8,
+            line=dict(color="red", width=2)
         ),
         showlegend=False
     ))
@@ -82,6 +82,7 @@ fig.update_layout(
 )
 
 st.plotly_chart(fig, use_container_width=True)
+
 
 
 
