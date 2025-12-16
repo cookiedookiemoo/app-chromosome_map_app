@@ -25,8 +25,8 @@ x_positions = list(range(len(chr_df)))
 
 for i, row in chr_df.iterrows():
     chr_name = row["chromosome"]
-    length = row["length_mb"]
-    centro = row["centromere_mb"]
+    length = row["length"]
+    centro = row["centromere"]
 
     # Chromosome line
     fig.add_trace(go.Scatter(
@@ -71,9 +71,10 @@ fig.update_layout(
     ),
     yaxis=dict(
         title="Physical position (Mb)",
-        range=[0, chr_df["length_mb"].max() + 2]
+        range=[0, chr_df["length"].max() + 2]
     ),
     height=600
 )
 
 st.plotly_chart(fig, use_container_width=True)
+
