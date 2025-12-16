@@ -16,6 +16,23 @@ selected_genes = []
 for gene in gene_df["gene"]:
     if st.sidebar.checkbox(gene):
         selected_genes.append(gene)
+        
+# Function to compute collision-free label positions
+def avoid_label_overlap(positions, min_gap=0.5):
+    """
+    positions: list of y positions (Mb)
+    min_gap: minimum vertical distance between labels
+    """
+    adjusted = []
+    for p in sorted(positions):
+        if not adjusted:
+            adjusted.append(p)
+        else:
+            if p - adjusted[-1] < min_gap:
+                adjusted.append(adjusted[-1] + min_gap)
+            else:
+                adjusted.append(p)
+    return adjusted
 
 # Create figure
 fig = go.Figure()
@@ -46,22 +63,45 @@ for i, row in chr_df.iterrows():
         marker=dict(size=12, color="gray"),
         showlegend=False
     ))
+    
+chr_genes = gene_df[gene_df["chromosome"] == chr_name].copy()
+chr_genes = chr_genes.sort_values("position")
+
+orig_y = chr_genes["position"].values
+label_y = avoid_label_overlap(orig_y, min_gap=0.4)
+chr_genes["label_y"] = label_y
 
 # Plot selected genes
 for gene in selected_genes:
     row = gene_df[gene_df["gene"] == gene].iloc[0]
     chr_index = chr_df.index[chr_df["chromosome"] == row["chromosome"]][0]
 
+    # Connector line
     fig.add_trace(go.Scatter(
-        x=[chr_index],
-        y=[row["position"]],
-        mode="markers+text",
-        text=[gene],
-        textfont=dict(size=14),
-        textposition="middle right",
-        marker=dict(size=8, symbol="line-ew", line=dict(width=2, color="red")),
+        x=[chr_index, chr_index + 0.12],
+        y=[row["position"], row["label_y"]],
+        mode="lines",
+        line=dict(color="gray", width=1),
         showlegend=False
     ))
+
+    # Gene label
+    fig.add_trace(go.Scatter(
+        x=[chr_index + 0.15],
+        y=[row["label_y"]],
+        mode="markers+text",
+        text=[row["gene"]],
+        textposition="middle right",
+        textfont=dict(size=11),
+        marker=dict(
+            symbol="line-ew",
+            size=14,
+            line=dict(color="blue", width=2)
+        ),
+        showlegend=False
+    ))
+
+
 
 # Layout
 fig.update_layout(
@@ -78,6 +118,7 @@ fig.update_layout(
 )
 
 st.plotly_chart(fig, use_container_width=True)
+
 
 
 
