@@ -58,7 +58,7 @@ for gene in selected_genes:
         mode="markers+text",
         text=[gene],
         textposition="middle right",
-        marker=dict(size=8, symbol="line-ew", color='red'),
+        marker=dict(size=8, symbol="line-ew", color='red', line=dict(width=2)),
         showlegend=False
     ))
 
@@ -77,6 +77,7 @@ fig.update_layout(
 )
 
 st.plotly_chart(fig, use_container_width=True)
+
 
 
 
