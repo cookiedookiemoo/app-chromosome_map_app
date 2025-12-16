@@ -14,6 +14,7 @@ st.sidebar.header("Select genes")
 # Uncheck all button
 if st.sidebar.button("❌ Uncheck all"):
     st.session_state.selected_genes = []
+    st.session_state.selected_genes = selected_genes
 selected_genes = []
 
 for gene in gene_df["gene"]:
@@ -85,6 +86,7 @@ fig.update_layout(
 )
 
 st.plotly_chart(fig, use_container_width=True)
+
 
 
 
