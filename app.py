@@ -53,7 +53,7 @@ for gene in selected_genes:
     chr_index = chr_df.index[chr_df["chromosome"] == row["chromosome"]][0]
 
     fig.add_trace(go.Scatter(
-        x=[chr_index + 0.15],
+        x=[chr_index],
         y=[row["position"]],
         mode="markers+text",
         text=[row["gene"]],
@@ -82,6 +82,7 @@ fig.update_layout(
 )
 
 st.plotly_chart(fig, use_container_width=True)
+
 
 
 
