@@ -43,7 +43,7 @@ for i, row in chr_df.iterrows():
         x=[i],
         y=[centro],
         mode="markers",
-        marker=dict(size=12, color="red"),
+        marker=dict(size=12, color="gray"),
         showlegend=False
     ))
 
@@ -77,5 +77,6 @@ fig.update_layout(
 )
 
 st.plotly_chart(fig, use_container_width=True)
+
 
 
