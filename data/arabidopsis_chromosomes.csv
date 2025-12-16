@@ -1,6 +1,7 @@
-chromosome,length_bp,centromere_bp
+chromosome,length,centromere
 Chr1,30427671,15000000
 Chr2,19698289,3600000
 Chr3,23459830,13500000
 Chr4,18585056,3600000
 Chr5,26975502,13000000
+
