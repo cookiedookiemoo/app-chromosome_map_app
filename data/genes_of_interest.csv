@@ -1,5 +1,6 @@
-gene,chromosome,position_bp
+gene,chromosome,position
 RAD51,Chr1,12034567
 DMC1,Chr3,8456123
 HEI10,Chr5,19023456
 ZIP4,Chr2,5432100
+
