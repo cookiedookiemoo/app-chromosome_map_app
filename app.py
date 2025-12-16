@@ -54,7 +54,7 @@ for gene in selected_genes:
 
     fig.add_trace(go.Scatter(
         x=[chr_index],
-        y=[row["position_mb"]],
+        y=[row["position"]],
         mode="markers+text",
         text=[gene],
         textposition="middle right",
@@ -77,4 +77,5 @@ fig.update_layout(
 )
 
 st.plotly_chart(fig, use_container_width=True)
+
 
