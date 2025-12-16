@@ -11,6 +11,9 @@ gene_df = pd.read_csv("data/genes_of_interest.csv")
 
 # Sidebar gene selection
 st.sidebar.header("Select genes")
+# Uncheck all button
+if st.sidebar.button("❌ Uncheck all"):
+    st.session_state.selected_genes = []
 selected_genes = []
 
 for gene in gene_df["gene"]:
@@ -84,26 +87,7 @@ fig.update_layout(
 st.plotly_chart(fig, use_container_width=True)
 
 
-st.sidebar.header("Select genes")
 
-# Initialize session state
-if "selected_genes" not in st.session_state:
-    st.session_state.selected_genes = []
-
-# Uncheck all button
-if st.sidebar.button("❌ Uncheck all"):
-    st.session_state.selected_genes = []
-
-# Gene multiselect
-selected_genes = st.sidebar.multiselect(
-    "Genes",
-    gene_df["gene"].unique(),
-    default=st.session_state.selected_genes,
-    key="gene_selector"
-)
-
-# Sync back to session state
-st.session_state.selected_genes = selected_genes
 
 
 
