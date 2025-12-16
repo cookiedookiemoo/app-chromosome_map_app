@@ -12,6 +12,8 @@ gene_df = pd.read_csv("data/genes_of_interest.csv")
 # Sidebar gene selection
 st.sidebar.header("Select genes")
 selected_genes = []
+if "selected_genes" not in st.session_state:
+    st.session_state.selected_genes = []
 # Uncheck all button
 if st.sidebar.button("❌ Uncheck all"):
     st.session_state.selected_genes = []
@@ -87,6 +89,7 @@ fig.update_layout(
 )
 
 st.plotly_chart(fig, use_container_width=True)
+
 
 
 
